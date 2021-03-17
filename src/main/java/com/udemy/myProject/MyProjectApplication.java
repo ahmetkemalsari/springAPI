@@ -17,11 +17,13 @@ public class MyProjectApplication {
 	@Bean
 	CommandLineRunner createInitialUsers(UserServiceManager manager){
 		return (args -> {
-			User user = new User();
-			user.setUsername("Kemal");
-			user.setDisplayName("root");
-			user.setPassword("P4ssword");
-			manager.save(user);
+			for(int i = 1; i<=25; i++){
+				User user = new User();
+				user.setUsername("user"+i);
+				user.setDisplayName("display"+i);
+				user.setPassword("P4ssword");
+				manager.save(user);
+			}
 		});
 	}
 }
