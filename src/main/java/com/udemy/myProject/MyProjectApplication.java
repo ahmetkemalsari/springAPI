@@ -1,6 +1,8 @@
 package com.udemy.myProject;
 
+import com.udemy.myProject.Managers.HoaxService;
 import com.udemy.myProject.Managers.UserServiceManager;
+import com.udemy.myProject.Models.Hoax;
 import com.udemy.myProject.Models.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +17,7 @@ public class MyProjectApplication {
 	}
 
 	@Bean
-	CommandLineRunner createInitialUsers(UserServiceManager manager){
+	CommandLineRunner createInitialUsers(UserServiceManager manager, HoaxService hoaxService){
 		return (args -> {
 			for(int i = 1; i<=25; i++){
 				User user = new User();
@@ -23,7 +25,13 @@ public class MyProjectApplication {
 				user.setDisplayName("display"+i);
 				user.setPassword("P4ssword");
 				manager.save(user);
+				for(int j = 1; j<=23; j++){
+					Hoax hoax = new Hoax();
+					hoax.setContent(user.getDisplayName() + " hoax - " + j);
+					hoaxService.save(hoax,user);
+				}
 			}
+
 		});
 	}
 }

@@ -20,7 +20,7 @@ import java.util.Collection;
 @Entity
 public class User  implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull(message = "{hoaxify.constraints.userName.NotNull.message}")
@@ -37,7 +37,7 @@ public class User  implements UserDetails {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{hoaxify.constraints.password.Pattern.message}")
     private String password;
 
-
+    @Lob
     private String image;
 
     @Override
